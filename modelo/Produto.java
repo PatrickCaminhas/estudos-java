@@ -1,14 +1,15 @@
 package modelo;
+import java.math.BigDecimal;
 
 public class Produto {
     private String nome;
     private String marca;
-    private Double peso;
-    private Double volume;
+    private BigDecimal peso;
+    private BigDecimal volume;
     private Integer quantidade;
-    private Double preco;
+    private BigDecimal preco;
 
-    public Produto(String nome, String marca,Integer quantidade, Double preco) {
+    public Produto(String nome, String marca,Integer quantidade, BigDecimal preco) {
         this.nome = nome;
         this.marca = marca;
         this.quantidade = quantidade;
@@ -23,11 +24,11 @@ public class Produto {
         return this.marca;
     }
 
-    public Double getPeso() {
+    public BigDecimal getPeso() {
         return this.peso;
     }
 
-    public Double getVolume() {
+    public BigDecimal getVolume() {
         return this.volume;
     }
 
@@ -35,7 +36,7 @@ public class Produto {
         return this.quantidade;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return this.preco;
     }
 
@@ -47,11 +48,11 @@ public class Produto {
         this.marca = marca;
     }
 
-    public void setPeso(Double peso) {
+    public void setPeso(BigDecimal peso) {
         this.peso = peso;
     }
 
-    public void setVolume(Double volume) {
+    public void setVolume(BigDecimal volume) {
         this.volume = volume;
     }
 
@@ -59,7 +60,7 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Date;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
 public class ComprasSupermercado {
     private Integer id = 1;
@@ -31,7 +32,7 @@ public class ComprasSupermercado {
         return this.nomeSupermercado;
     }
 
-    public void adicionarProduto(String nome, String marca, Integer quantidade, Double preco) {
+    public void adicionarProduto(String nome, String marca, Integer quantidade, BigDecimal preco) {
         Produto produto = new Produto(nome, marca, quantidade, preco);
         this.itens.add(produto);
     }
@@ -44,11 +45,13 @@ public class ComprasSupermercado {
         return this.itens;
     }
 
-    public Double getTotalCompra() {
-        Double total = 0.0;
+    public BigDecimal getTotalCompra() {
+        BigDecimal total = new BigDecimal(0.0);
         for (Produto produto : this.itens) {
-            total += produto.getPreco()
-                    * ((produto.getQuantidade() != null || produto.getQuantidade() != 0) ? produto.getQuantidade() : 1);
+            total.add(produto.getPreco()
+                    .multiply(((produto.getQuantidade() != null || produto.getQuantidade() != 0)
+                            ? new BigDecimal(produto.getQuantidade())
+                            : new BigDecimal(1))));
         }
         return total;
     }
@@ -67,7 +70,7 @@ public class ComprasSupermercado {
         for (Produto produto : this.itens) {
             cabecalho += produto.getMarca() + ";" + produto.getNome() + ";" + produto.getPeso() + ";"
                     + produto.getVolume() + ";" + produto.getQuantidade() + ";" + produto.getPreco() + ";"
-                    + (produto.getQuantidade() * produto.getPreco()) + ";" + "\n";
+                    + (new BigDecimal(produto.getQuantidade()).multiply(produto.getPreco())) + ";" + "\n";
         }
         try {
             Files.writeString(caminho, cabecalho);
@@ -128,13 +131,13 @@ public class ComprasSupermercado {
                         try {
 
                             Integer qtd = Integer.valueOf(quantidade);
-                            Double pr = Double.valueOf(preco);
+                            BigDecimal pr = new BigDecimal(preco);
                             adicionarProduto(produto, marca, qtd, pr);
                         } catch (NumberFormatException nfe) {
                             System.out.println("Quantidade ou preço inválido. Produto não adicionado.");
                         }
                         String resposta = "";
-                                                    this.util.limparTerminal();
+                        this.util.limparTerminal();
 
                         do {
 
@@ -194,7 +197,7 @@ public class ComprasSupermercado {
             Produto produto = itens.get(indice);
             System.out.println(indice + " - " + produto.getNome() + " " + produto.getMarca() + " / Quantidade: "
                     + produto.getQuantidade() + " / Valor Unitario: " + produto.getPreco() + " / Valor Total: "
-                    + (produto.getQuantidade() * produto.getPreco()));
+                    + (new BigDecimal(produto.getQuantidade()).multiply(produto.getPreco())));
         }
     }
 

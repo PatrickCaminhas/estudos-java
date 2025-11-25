@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.stream.Stream;
+import java.math.BigDecimal;
 
 public class Util {
 
@@ -118,7 +119,7 @@ public class Util {
         return texto.replaceAll("[^a-zA-Z0-9]", "");
     }
 
-    public String converterDoubleParaReal(Double numero) {
+    public String converterBigDecimalParaReal(BigDecimal numero) {
         String valor = numero.toString();
         String[] arrayValor = valor.split(".");
 
@@ -126,9 +127,9 @@ public class Util {
                 + ((arrayValor[1].length() > 1) ? arrayValor[1].substring(0, 2) : arrayValor[1] + "0");
     }
 
-    public Double converterRealParaDouble(String real){
+    public BigDecimal converterRealParaBigDecimal(String real){
         String[] valor = real.split(",");
-        return Double.parseDouble(removerCaracteresEspeciais(valor[0])+"."+valor[1]);
+        return new BigDecimal(removerCaracteresEspeciais(valor[0])+"."+valor[1]);
     }
 
     public String formatarNumeroParaCPF(String numero) {

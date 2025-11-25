@@ -55,8 +55,8 @@ public class App {
         // System.out.println(Imposto.calculaValeTransporte(5.74,2,"5x2"));
         // ComprasSupermercado listaCompras = new ComprasSupermercado("EPA");
         // listaCompras.menu();
-        Gastos gastos = new Gastos();
-        gastos.setResultado();
-        // new App().menu();
+        // Gastos gastos = new Gastos();
+        // gastos.setResultado();
+        new App().menu();
     }
 }
