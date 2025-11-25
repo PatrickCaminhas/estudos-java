@@ -10,6 +10,7 @@ import java.util.UUID;
 import java.util.Date;
 import java.util.Scanner;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ComprasSupermercado {
     private Integer id = 1;

@@ -29,6 +29,14 @@ As etapas são definidas por cada forma na qual será feito esse projeto, sendo 
 - Condicionais (if, else, else-if, switch-case)
 - Leitura do teclado (Scanner)
 - Classes
-- Manipulaçao e leitura de datas
+- Manipulaçao de datas
 - Leitura e manipulação de arquivos
+- Leitura e manipulação de caminhos
 - Leitura de arquivos csv
+- BigDecimal
+- Conversão de tipos e Parsing
+- Construtores
+- Getters e Setters
+- Coleções
+- Tratamento de exceção
+- ProcessBuilder

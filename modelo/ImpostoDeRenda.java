@@ -29,13 +29,13 @@ public class ImpostoDeRenda {
     }
 
     private int GetFaixaDeRendimento(BigDecimal valor) {
-        if (valor.compareTo(new BigDecimal(2259.20)) <= 0) {
+        if (valor.compareTo(BigDecimal.valueOf(2259.20)) <= 0) {
             return 1;
-        } else if (valor.compareTo(new BigDecimal(2259.20)) > 0 && valor.compareTo(new BigDecimal(2826.65)) <= 0) {
+        } else if (valor.compareTo(BigDecimal.valueOf(2259.20)) > 0 && valor.compareTo( BigDecimal.valueOf(2826.65)) <= 0) {
             return 2;
-        } else if (valor.compareTo(new BigDecimal(2826.65)) > 0 && valor.compareTo(new BigDecimal(3751.05)) <= 0) {
+        } else if (valor.compareTo(BigDecimal.valueOf(2826.65)) > 0 && valor.compareTo( BigDecimal.valueOf(3751.05)) <= 0) {
             return 3;
-        } else if (valor.compareTo(new BigDecimal(3751.05)) > 0 && valor.compareTo(new BigDecimal(4664.68)) <= 0) {
+        } else if (valor.compareTo( BigDecimal.valueOf(3751.05)) > 0 && valor.compareTo( BigDecimal.valueOf(4664.68)) <= 0) {
             return 4;
         } else {
             return 5;
@@ -46,17 +46,17 @@ public class ImpostoDeRenda {
         int faixa = GetFaixaDeRendimento(valor);
         switch (faixa) {
             case 1:
-                return new BigDecimal(0);
+                return BigDecimal.valueOf(0);
             case 2:
-                return new BigDecimal(0.075);
+                return BigDecimal.valueOf(0.075);
             case 3:
-                return new BigDecimal(0.15);
+                return BigDecimal.valueOf(0.15);
             case 4:
-                return new BigDecimal(0.225);
+                return BigDecimal.valueOf(0.225);
             case 5:
-                return new BigDecimal(0.275);
+                return BigDecimal.valueOf(0.275);
             default:
-                return new BigDecimal(0);
+                return BigDecimal.valueOf(0);
         }
     }
 
@@ -64,31 +64,31 @@ public class ImpostoDeRenda {
         int faixa = GetFaixaDeRendimento(valor);
         switch (faixa) {
             case 1:
-                return new BigDecimal(0);
+                return BigDecimal.valueOf(0);
             case 2:
-                return new BigDecimal(169.44);
+                return BigDecimal.valueOf(169.44);
             case 3:
-                return new BigDecimal(381.44);
+                return BigDecimal.valueOf(381.44);
             case 4:
-                return new BigDecimal(662.77);
+                return BigDecimal.valueOf(662.77);
             case 5:
-                return new BigDecimal(896);
+                return BigDecimal.valueOf(896);
             default:
-                return new BigDecimal(0);
+                return BigDecimal.valueOf(0);
         }
     }
 
     public BigDecimal GetINSS(BigDecimal rendimento) {
-        BigDecimal faixa_1 = new BigDecimal(0);
-        BigDecimal faixa_2 = new BigDecimal(0);
-        BigDecimal faixa_3 = new BigDecimal(0);
-        BigDecimal faixa_4 = new BigDecimal(0);
+        BigDecimal faixa_1 = BigDecimal.valueOf(0);
+        BigDecimal faixa_2 = BigDecimal.valueOf(0);
+        BigDecimal faixa_3 = BigDecimal.valueOf(0);
+        BigDecimal faixa_4 = BigDecimal.valueOf(0);
         BigDecimal teto;
 
-        BigDecimal valor_faixa_1 = new BigDecimal(1518.00);
-        BigDecimal valor_faixa_2 = new BigDecimal(2793.88);
-        BigDecimal valor_faixa_3 = new BigDecimal(4190.83);
-        BigDecimal valor_faixa_4 = new BigDecimal(8157.41);
+        BigDecimal valor_faixa_1 = BigDecimal.valueOf(1518.00);
+        BigDecimal valor_faixa_2 = BigDecimal.valueOf(2793.88);
+        BigDecimal valor_faixa_3 = BigDecimal.valueOf(4190.83);
+        BigDecimal valor_faixa_4 = BigDecimal.valueOf(8157.41);
 
         if (rendimento.compareTo(valor_faixa_3) >= 0) {
             if (rendimento.compareTo(valor_faixa_4) > 0) {
@@ -96,8 +96,8 @@ public class ImpostoDeRenda {
             } else {
                 teto = rendimento;
             }
-            faixa_4 = (((teto.subtract(valor_faixa_3)).multiply(new BigDecimal(0.14))).multiply(new BigDecimal(100)))
-                    .divide(new BigDecimal(100.0));
+            faixa_4 = (((teto.subtract(valor_faixa_3)).multiply(BigDecimal.valueOf(0.14))).multiply(BigDecimal.valueOf(100)))
+                    .divide(BigDecimal.valueOf(100.0),2,RoundingMode.HALF_UP);
         }
         if ((rendimento.compareTo(valor_faixa_2) > 0 && rendimento.compareTo(valor_faixa_3) <= 0)
                 || (rendimento.compareTo(valor_faixa_3) > 0)) {
@@ -106,8 +106,8 @@ public class ImpostoDeRenda {
             } else {
                 teto = rendimento;
             }
-            faixa_3 = (((teto.subtract(valor_faixa_2)).multiply(new BigDecimal(0.12))).multiply(new BigDecimal(100)))
-                    .divide(new BigDecimal(100.0));
+            faixa_3 = (((teto.subtract(valor_faixa_2)).multiply(BigDecimal.valueOf(0.12))).multiply(BigDecimal.valueOf(100)))
+                    .divide(BigDecimal.valueOf(100.0),2,RoundingMode.HALF_UP);
         }
         if ((rendimento.compareTo(valor_faixa_1) > 0 && rendimento.compareTo(valor_faixa_2) <= 0)
                 || (rendimento.compareTo(valor_faixa_2) > 0)) {
@@ -116,25 +116,25 @@ public class ImpostoDeRenda {
             } else {
                 teto = rendimento;
             }
-            faixa_2 = (((teto.subtract(valor_faixa_1)).multiply(new BigDecimal(0.09))).multiply(new BigDecimal(100)))
-                    .divide(new BigDecimal(100.0));
+            faixa_2 = (((teto.subtract(valor_faixa_1)).multiply(BigDecimal.valueOf(0.09))).multiply(BigDecimal.valueOf(100)))
+                    .divide(BigDecimal.valueOf(100.0),2,RoundingMode.HALF_UP);
         }
-        faixa_1 = (valor_faixa_1.multiply( new BigDecimal(0.075)).multiply( new BigDecimal(100))).divide( new BigDecimal(100.0));
+        faixa_1 = (valor_faixa_1.multiply( BigDecimal.valueOf(0.075)).multiply( BigDecimal.valueOf(100))).divide( BigDecimal.valueOf(100.0),2,RoundingMode.HALF_UP);
 
         return faixa_1.add(faixa_2).add(faixa_3).add(faixa_4);
     }
 
     private BigDecimal GetDeducaoPorDepedente() {
-        return this.DEDUCAO_DEPENDENTE.multiply( new BigDecimal(this.dependente));
+        return this.DEDUCAO_DEPENDENTE.multiply( BigDecimal.valueOf(this.dependente));
     }
 
     public BigDecimal calcularImpostoDeRenda() {
         if (GetFaixaDeRendimento(this.rendimento.subtract(DEDUCAO_SIMPLIFICADA).subtract(GetINSS(this.rendimento))) == 1) {
-            return new BigDecimal(0.00);
+            return BigDecimal.valueOf(0.00);
         } else {
             BigDecimal valorParaCalculo = this.rendimento.subtract( GetINSS(this.rendimento)).subtract( GetDeducaoPorDepedente());
             BigDecimal resultado = (valorParaCalculo.multiply( GetAliquota(valorParaCalculo))).subtract( GetDeducao(valorParaCalculo));
-            return resultado.multiply( new BigDecimal(100.00)).divide( new BigDecimal(100.00));
+            return resultado.multiply( BigDecimal.valueOf(100.00)).divide( BigDecimal.valueOf(100.00),2,RoundingMode.HALF_UP);
         }
     }
 
@@ -170,8 +170,8 @@ public class ImpostoDeRenda {
         } else {
             meses = 12;
         }
-        BigDecimal valor = (this.rendimento.divide( new BigDecimal(12))).multiply( new BigDecimal(meses));
-        return new BigDecimal[] { (valor.subtract(GetINSS(valor))), (valor.divide( new BigDecimal(2))), (valor.divide( new BigDecimal(2))).subtract( GetINSS(valor)) };
+        BigDecimal valor = (this.rendimento.divide( BigDecimal.valueOf(12),2,RoundingMode.HALF_UP)).multiply( BigDecimal.valueOf(meses));
+        return new BigDecimal[] { (valor.subtract(GetINSS(valor))), (valor.divide( BigDecimal.valueOf(2),2,RoundingMode.HALF_UP)), (valor.divide( BigDecimal.valueOf(2),2,RoundingMode.HALF_UP)).subtract( GetINSS(valor)) };
 
     }
 
@@ -185,7 +185,7 @@ public class ImpostoDeRenda {
         int dependente = Integer.parseInt(dependenteTexto);
         System.out.println("Utiliza vale transporte?\nS - Sim\nN - Nao");
         String transporte = "";
-        BigDecimal valeTransporte = new BigDecimal( 0.0);
+        BigDecimal valeTransporte = BigDecimal.valueOf( 0.0);
 
         do {
             transporte = leitor.nextLine();
@@ -219,7 +219,7 @@ public class ImpostoDeRenda {
     public BigDecimal calculaValeTransporte(BigDecimal valorPassagem, Integer quantidadePassagensDiarias,
             String escala) {
         LocalDate dataAtual = LocalDate.now();
-        return (valorPassagem.multiply(new BigDecimal(quantidadePassagensDiarias))).multiply(new BigDecimal(this.util.diasUteisTrabalho(dataAtual.getYear(), dataAtual.getMonthValue(), escala)));
+        return (valorPassagem.multiply(BigDecimal.valueOf(quantidadePassagensDiarias))).multiply(BigDecimal.valueOf(this.util.diasUteisTrabalho(dataAtual.getYear(), dataAtual.getMonthValue(), escala)));
     }
 
     public String[] lerInformacoes() {
@@ -243,8 +243,8 @@ public class ImpostoDeRenda {
         Path caminho = Paths.get("dados/informacoes-renda.txt");
         String cabecalho = "Salario Bruto;Dependentes;Data de inicio;INSS;Imposto de Renda;Vale Transporte;Salario Liquido;Decimo Terceiro;Data Modificacao\n";
         ImpostoDeRenda imposto = new ImpostoDeRenda(salarioBruto, dependentes);
-        if (valeTransporte.compareTo( (salarioBruto.multiply( new BigDecimal(0.06))))>0) {
-            valeTransporte = salarioBruto.multiply( new BigDecimal(0.06));
+        if (valeTransporte.compareTo( (salarioBruto.multiply( BigDecimal.valueOf(0.06))))>0) {
+            valeTransporte = salarioBruto.multiply( BigDecimal.valueOf(0.06));
         }
         this.util.limparTerminal();
         BigDecimal inss = imposto.GetINSS(salarioBruto), ir = imposto.calcularImpostoDeRenda();
